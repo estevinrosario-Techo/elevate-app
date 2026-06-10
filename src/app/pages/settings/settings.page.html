@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Ajustes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="--padding-bottom: 80px;">
+
+  <!-- GENERAL -->
+  <ion-list-header>
+    <ion-label>GENERAL</ion-label>
+  </ion-list-header>
+
+  <ion-list>
+    <ion-item>
+      <ion-icon slot="start" name="notifications-outline" color="warning"></ion-icon>
+      <ion-label>Notificaciones</ion-label>
+      
+      <ion-toggle [(ngModel)]="notifEnabled" (ionChange)="toggleNotifications()" slot="end"></ion-toggle>
+    </ion-item>
+
+    <ion-item button detail (click)="goToCategories()">
+      <ion-icon slot="start" name="pricetag-outline" color="tertiary"></ion-icon>
+      <ion-label>Categorías</ion-label>
+      <ion-note slot="end">{{ categoryCount }}</ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon slot="start" name="calendar-outline" color="primary"></ion-icon>
+      <ion-label>Inicio de semana</ion-label>
+      <ion-select [(ngModel)]="weekStart" slot="end" interface="popover">
+        <ion-select-option value="0">Domingo</ion-select-option>
+        <ion-select-option value="1">Lunes</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <!-- DATOS -->
+  <ion-list-header>
+    <ion-label>DATOS</ion-label>
+  </ion-list-header>
+
+  <ion-list>
+    <ion-item button (click)="exportTasks()">
+      <ion-icon slot="start" name="download-outline" color="success"></ion-icon>
+      <ion-label>Exportar tareas</ion-label>
+    </ion-item>
+
+    <ion-item button (click)="confirmClearAll()">
+      <ion-icon slot="start" name="trash-outline" color="danger"></ion-icon>
+      <ion-label color="danger">Borrar todos los datos</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- ACERCA DE -->
+  <ion-list-header>
+    <ion-label>ACERCA DE</ion-label>
+  </ion-list-header>
+
+  <ion-list>
+    <ion-item>
+      <ion-icon slot="start" name="information-circle-outline" color="medium"></ion-icon>
+      <ion-label>
+        <h3>Elévate</h3>
+        <p>Versión 1.0.0-beta</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon slot="start" name="person-outline" color="medium"></ion-icon>
+      <ion-label>
+        <h3>Estevin David Suarez Rosario</h3>
+        <p>Politécnico Grancolombiano · 2026</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

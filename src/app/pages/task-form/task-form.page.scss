@@ -1,0 +1,25 @@
+.error-banner {
+  background: var(--ion-color-danger-tint);
+  color: var(--ion-color-danger-shade);
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.section-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ion-color-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 16px 16px 8px;
+}
+
+ion-segment {
+  margin: 0 0 12px 0;
+}
+
+.save-btn {
+  margin-top: 24px;
+}

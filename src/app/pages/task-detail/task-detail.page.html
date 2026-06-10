@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Detalle</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openEdit()">
+        <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" *ngIf="task">
+  <div class="badges-row">
+    <ion-badge [color]="priorityColor">{{ priorityLabel }}</ion-badge>
+    <ion-badge color="medium">{{ task.category }}</ion-badge>
+    <ion-badge color="danger" *ngIf="isOverdue">⚠ Vencida</ion-badge>
+  </div>
+
+  <h1 class="task-title" [class.completed-text]="task.completed">{{ task.title }}</h1>
+
+  <ion-list lines="none" class="meta-list">
+    <ion-item *ngIf="task.dueDate">
+      <ion-icon slot="start" name="calendar-outline" color="primary"></ion-icon>
+      <ion-label>
+        <p>Vence el</p>
+        <h3>{{ task.dueDate | date:'dd/MM/yyyy HH:mm' }}</h3>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-icon slot="start" name="time-outline" color="medium"></ion-icon>
+      <ion-label>
+        <p>Creada hace</p>
+        <h3>{{ createdAgo }}</h3>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="task.reminderEnabled && task.dueDate">
+      <ion-icon slot="start" name="notifications-outline" color="warning"></ion-icon>
+      <ion-label><h3>Recordatorio activado</h3></ion-label>
+    </ion-item>
+  </ion-list>
+
+  <div class="description-section" *ngIf="task.description">
+    <h4>Descripción</h4>
+    <p>{{ task.description }}</p>
+  </div>
+
+  <ion-item lines="none" class="complete-toggle">
+    <ion-label>{{ task.completed ? 'Completada ✓' : 'Marcar como completada' }}</ion-label>
+    <ion-toggle slot="end" [checked]="task.completed" (ionChange)="toggleComplete()"></ion-toggle>
+  </ion-item>
+
+  <div class="action-buttons">
+    <ion-button expand="block" color="primary" (click)="openEdit()">
+      <ion-icon slot="start" name="create-outline"></ion-icon>
+      Editar tarea
+    </ion-button>
+    <ion-button expand="block" color="danger" fill="outline" (click)="confirmDelete()">
+      <ion-icon slot="start" name="trash-outline"></ion-icon>
+      Eliminar
+    </ion-button>
+  </div>
+</ion-content>
+
+<ion-content *ngIf="!task" class="ion-padding">
+  <div style="text-align:center;padding-top:40px;color:var(--ion-color-medium)">
+    <ion-icon name="alert-circle-outline" style="font-size:60px"></ion-icon>
+    <p>Tarea no encontrada.</p>
+    <ion-button (click)="goBack()">Volver</ion-button>
+  </div>
+</ion-content>

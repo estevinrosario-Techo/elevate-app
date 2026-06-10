@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="cancel()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ isEditing ? 'Editar Tarea' : 'Nueva Tarea' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="save()" [strong]="true">
+        <ion-icon slot="icon-only" name="checkmark-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- Error mensaje -->
+  <div class="error-banner" *ngIf="submitted && !form.title">
+    ⚠ El título es obligatorio
+  </div>
+
+  <!-- Título -->
+  <ion-item>
+    <ion-label position="stacked">Título *</ion-label>
+    <ion-input
+      [(ngModel)]="form.title"
+      placeholder="Ej: Entregar informe..."
+      clearInput>
+    </ion-input>
+  </ion-item>
+
+  <!-- Descripción -->
+  <ion-item>
+    <ion-label position="stacked">Descripción (opcional)</ion-label>
+    <ion-textarea
+      [(ngModel)]="form.description"
+      placeholder="Notas adicionales..."
+      rows="3">
+    </ion-textarea>
+  </ion-item>
+
+  <!-- Prioridad -->
+  <div class="section-label">Prioridad</div>
+  <ion-segment [(ngModel)]="form.priority">
+    <ion-segment-button value="high">
+      <ion-label>🔴 Alta</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="medium">
+      <ion-label>🟠 Media</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="low">
+      <ion-label>🟢 Baja</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Categoría -->
+  <ion-item>
+    <ion-label position="stacked">Categoría</ion-label>
+    <ion-select [(ngModel)]="form.category" interface="action-sheet" placeholder="Seleccionar...">
+      <ion-select-option *ngFor="let cat of categories" [value]="cat">{{ cat }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- Fecha de vencimiento -->
+  <ion-item>
+    <ion-label position="stacked">Fecha de vencimiento</ion-label>
+    <ion-input
+      type="datetime-local"
+      [(ngModel)]="form.dueDate">
+    </ion-input>
+  </ion-item>
+
+  <!-- Toggle recordatorio -->
+  <ion-item *ngIf="form.dueDate">
+    <ion-label>Recordatorio 24h antes</ion-label>
+    <ion-toggle [(ngModel)]="form.reminderEnabled" slot="end"></ion-toggle>
+  </ion-item>
+
+  <!-- Botón guardar -->
+  <div class="save-btn">
+    <ion-button expand="block" color="primary" (click)="save()">
+      <ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>
+      {{ isEditing ? 'Actualizar Tarea' : 'Crear Tarea' }}
+    </ion-button>
+  </div>
+
+</ion-content>

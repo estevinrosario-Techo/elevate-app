@@ -1,0 +1,30 @@
+# Node
+node_modules/
+npm-debug.log*
+
+# Angular
+dist/
+.angular/
+.browserslistrc
+
+# Capacitor
+android/
+ios/
+*.apk
+*.ipa
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db

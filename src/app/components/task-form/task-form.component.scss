@@ -1,0 +1,45 @@
+ion-item {
+  --padding-start: 0;
+  margin-bottom: 8px;
+}
+
+.form-section {
+  padding: 12px 0 8px 0;
+}
+
+.section-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ion-color-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.priority-segment {
+  --background: var(--ion-color-light);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.seg-high.segment-button-checked {
+  --color-checked: white;
+  --background-checked: var(--ion-color-danger);
+}
+
+.seg-medium.segment-button-checked {
+  --color-checked: white;
+  --background-checked: var(--ion-color-warning);
+}
+
+.seg-low.segment-button-checked {
+  --color-checked: white;
+  --background-checked: var(--ion-color-success);
+}
+
+.error-note {
+  font-size: 12px;
+  padding: 4px 16px;
+  display: block;
+}

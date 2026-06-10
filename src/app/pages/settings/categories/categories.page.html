@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/settings" text="Ajustes"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Categorías</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="promptAddCategory()">
+        <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let cat of categories">
+
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="confirmDelete(cat)">
+          <ion-icon slot="top" name="trash-outline"></ion-icon>
+          Eliminar
+        </ion-item-option>
+      </ion-item-options>
+
+      <ion-item>
+        <ion-icon slot="start" name="pricetag-outline" color="tertiary"></ion-icon>
+        <ion-label>{{ cat }}</ion-label>
+      </ion-item>
+
+    </ion-item-sliding>
+  </ion-list>
+
+  <div class="hint">
+    <ion-icon name="information-circle-outline"></ion-icon>
+    Desliza a la izquierda para eliminar una categoría.
+  </div>
+
+</ion-content>

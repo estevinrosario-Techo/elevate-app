@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Completadas
+      <ion-badge color="light" class="count-badge">{{ completedTasks.length }}</ion-badge>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="--padding-bottom: 80px;">
+
+  <div class="empty-state" *ngIf="completedTasks.length === 0">
+    <ion-icon name="trophy-outline" class="empty-icon"></ion-icon>
+    <h3>Aún no hay tareas completadas</h3>
+    <p>¡Completa tu primera tarea!</p>
+  </div>
+
+  <ng-container *ngFor="let group of groupedTasks">
+    <ion-item-divider sticky>
+      <ion-label>{{ group.label }}</ion-label>
+    </ion-item-divider>
+
+    <ion-list>
+      <ion-item-sliding *ngFor="let task of group.tasks">
+
+        <!-- Swipe right: restore -->
+        <ion-item-options side="start">
+          <ion-item-option color="primary" (click)="restoreTask(task)">
+            <ion-icon slot="top" name="refresh-outline"></ion-icon>
+            Restaurar
+          </ion-item-option>
+        </ion-item-options>
+
+        <!-- Swipe left: delete -->
+        <ion-item-options side="end">
+          <ion-item-option color="danger" (click)="confirmDelete(task)">
+            <ion-icon slot="top" name="trash-outline"></ion-icon>
+            Eliminar
+          </ion-item-option>
+        </ion-item-options>
+
+        <ion-item>
+          <ion-icon slot="start" name="checkmark-circle" color="success"></ion-icon>
+          <ion-label>
+            <h2 class="completed-text">{{ task.title }}</h2>
+            <div class="task-meta">
+              <ion-badge color="medium">{{ task.category }}</ion-badge>
+              <span class="date-label">{{ task.completedAt | date:'dd/MM HH:mm' }}</span>
+            </div>
+          </ion-label>
+          <ion-button fill="clear" size="small" slot="end" (click)="restoreTask(task)">
+            <ion-icon slot="icon-only" name="refresh-outline" color="primary"></ion-icon>
+          </ion-button>
+        </ion-item>
+
+      </ion-item-sliding>
+    </ion-list>
+  </ng-container>
+
+</ion-content>

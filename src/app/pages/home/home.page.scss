@@ -1,0 +1,110 @@
+.header-title {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.app-name {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.date-label {
+  font-size: 12px;
+  opacity: 0.8;
+  text-transform: capitalize;
+}
+
+.chips-container {
+  display: flex;
+  gap: 8px;
+  padding: 4px 8px;
+  overflow-x: auto;
+  &::-webkit-scrollbar { display: none; }
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  color: var(--ion-color-medium);
+  text-align: center;
+  padding: 20px;
+
+  .empty-icon {
+    font-size: 80px;
+    margin-bottom: 16px;
+    color: var(--ion-color-primary-tint);
+  }
+
+  h3 { font-size: 20px; margin-bottom: 8px; }
+  p { font-size: 14px; }
+}
+
+ion-item {
+  --padding-start: 12px;
+  --inner-padding-end: 12px;
+
+  &.overdue {
+    --background: rgba(var(--ion-color-danger-rgb), 0.04);
+  }
+}
+
+.task-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+ion-badge {
+  font-size: 11px;
+  padding: 3px 7px;
+}
+
+.priority-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+
+  &.dot-high { background: var(--ion-color-danger); }
+  &.dot-medium { background: var(--ion-color-warning); }
+  &.dot-low { background: var(--ion-color-success); }
+}
+
+.due-date {
+  font-size: 12px;
+  color: var(--ion-color-medium);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+
+  ion-icon { font-size: 12px; }
+
+  &.overdue-text { color: var(--ion-color-danger); font-weight: 600; }
+}
+
+.completed-text {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.notif-icon {
+  font-size: 14px;
+}
+
+.tab-page-content {
+  --padding-bottom: 80px;
+}
+
+.empty-state ion-button {
+  margin-top: 20px;
+}
+
+.fab-above-tabs {
+  margin-bottom: 60px;
+}

@@ -1,0 +1,86 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Mis Tareas</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openNewTask()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar color="primary">
+    <ion-searchbar
+      [(ngModel)]="searchText"
+      (ionInput)="onSearch()"
+      placeholder="Buscar tareas..."
+      animated>
+    </ion-searchbar>
+  </ion-toolbar>
+
+  <ion-toolbar color="light">
+    <div class="chips-container">
+      <ion-chip [color]="priorityFilter === 'all' ? 'primary' : 'medium'" (click)="setPriority('all')">Todas</ion-chip>
+      <ion-chip [color]="priorityFilter === 'high' ? 'danger' : 'medium'" (click)="setPriority('high')">Alta</ion-chip>
+      <ion-chip [color]="priorityFilter === 'medium' ? 'warning' : 'medium'" (click)="setPriority('medium')">Media</ion-chip>
+      <ion-chip [color]="priorityFilter === 'low' ? 'success' : 'medium'" (click)="setPriority('low')">Baja</ion-chip>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="tab-page-content">
+
+  <div class="empty-state" *ngIf="filteredTasks.length === 0">
+    <ion-icon name="checkmark-done-circle-outline" class="empty-icon"></ion-icon>
+    <h3>¡Sin tareas pendientes!</h3>
+    <p>Toca el botón + para agregar una nueva tarea.</p>
+    <ion-button color="primary" (click)="openNewTask()">
+      <ion-icon slot="start" name="add"></ion-icon>
+      Nueva tarea
+    </ion-button>
+  </div>
+
+  <ion-list *ngIf="filteredTasks.length > 0">
+    <ion-item-sliding *ngFor="let task of filteredTasks; trackBy: trackById">
+
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="confirmDelete(task)">
+          <ion-icon slot="top" name="trash-outline"></ion-icon>
+          Eliminar
+        </ion-item-option>
+      </ion-item-options>
+
+      <ion-item button (click)="openDetail(task)" [class.overdue]="isOverdue(task)">
+        <ion-checkbox
+          slot="start"
+          [checked]="task.completed"
+          (ionChange)="toggleComplete(task)"
+          (click)="$event.stopPropagation()">
+        </ion-checkbox>
+        <ion-label>
+          <h2>{{ task.title }}</h2>
+          <div class="task-meta">
+            <ion-badge [color]="getCategoryColor(task.category)">{{ task.category }}</ion-badge>
+            <span class="priority-dot" [class]="'dot-' + task.priority"></span>
+            <span class="due-date" *ngIf="task.dueDate" [class.overdue-text]="isOverdue(task)">
+              {{ task.dueDate | date:'dd MMM' }}
+            </span>
+          </div>
+        </ion-label>
+        <ion-icon
+          slot="end"
+          name="notifications-outline"
+          *ngIf="task.reminderEnabled && task.dueDate"
+          color="medium">
+        </ion-icon>
+      </ion-item>
+
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="fab-above-tabs">
+    <ion-fab-button color="primary" (click)="openNewTask()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

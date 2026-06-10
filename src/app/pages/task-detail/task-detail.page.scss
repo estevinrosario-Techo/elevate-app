@@ -1,0 +1,80 @@
+.badges-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.task-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ion-color-dark);
+  margin: 0 0 16px 0;
+  line-height: 1.3;
+
+  &.completed-text {
+    text-decoration: line-through;
+    opacity: 0.5;
+  }
+}
+
+.meta-list {
+  background: var(--ion-color-light);
+  border-radius: 12px;
+  margin-bottom: 16px;
+
+  ion-item {
+    --background: transparent;
+    --padding-start: 12px;
+  }
+
+  ion-label p { font-size: 11px; color: var(--ion-color-medium); }
+  ion-label h3 { font-size: 14px; font-weight: 500; }
+}
+
+.description-section {
+  background: var(--ion-color-light);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+
+  h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ion-color-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 8px 0;
+  }
+
+  p {
+    font-size: 15px;
+    color: var(--ion-color-dark);
+    line-height: 1.5;
+    margin: 0;
+  }
+}
+
+.complete-toggle {
+  --background: var(--ion-color-light);
+  border-radius: 12px;
+  margin-bottom: 24px;
+  --padding-start: 16px;
+  --inner-padding-end: 16px;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+  color: var(--ion-color-medium);
+
+  ion-icon { font-size: 60px; margin-bottom: 12px; }
+}

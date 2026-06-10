@@ -1,0 +1,97 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Estadísticas
+      <span class="month-label">{{ today | date:'MMMM yyyy':'':'es' }}</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" style="--padding-bottom: 80px;">
+
+  <!-- Summary cards -->
+  <div class="cards-grid">
+    <ion-card class="stat-card pending">
+      <ion-card-content>
+        <div class="stat-number">{{ stats.pending }}</div>
+        <div class="stat-label">Pendientes</div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="stat-card completed">
+      <ion-card-content>
+        <div class="stat-number">{{ stats.completed }}</div>
+        <div class="stat-label">Completadas</div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="stat-card weekly">
+      <ion-card-content>
+        <div class="stat-number">{{ stats.weeklyCompleted }}</div>
+        <div class="stat-label">Esta semana</div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="stat-card overdue">
+      <ion-card-content>
+        <div class="stat-number">{{ stats.overdue }}</div>
+        <div class="stat-label">Vencidas</div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Donut chart: by status -->
+  <ion-card *ngIf="stats.total > 0">
+    <ion-card-header>
+      <ion-card-title>Estado de Tareas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="chart-container">
+        <canvas id="donutChart"></canvas>
+      </div>
+      <div class="legend">
+        <div class="legend-item">
+          <span class="dot" style="background:#2dd36f"></span> Completadas ({{ stats.completionRate }}%)
+        </div>
+        <div class="legend-item">
+          <span class="dot" style="background:#428cff"></span> Pendientes
+        </div>
+        <div class="legend-item" *ngIf="stats.overdue > 0">
+          <span class="dot" style="background:#eb445a"></span> Vencidas
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Bar chart: by priority -->
+  <ion-card *ngIf="stats.total > 0">
+    <ion-card-header>
+      <ion-card-title>Tareas por Prioridad</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="chart-container">
+        <canvas id="barChart"></canvas>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Weekly progress -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Progreso Semanal</ion-card-title>
+      <ion-card-subtitle>{{ stats.weeklyCompleted }} de {{ stats.weeklyTotal }} tareas completadas</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-progress-bar [value]="weeklyProgress" color="success"></ion-progress-bar>
+      <div class="progress-label">{{ stats.weeklyRate }}%</div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Empty state -->
+  <div class="empty-state" *ngIf="stats.total === 0">
+    <ion-icon name="bar-chart-outline" class="empty-icon"></ion-icon>
+    <h3>Sin datos aún</h3>
+    <p>Crea algunas tareas para ver tus estadísticas.</p>
+  </div>
+
+</ion-content>

@@ -1,0 +1,20 @@
+<ion-router-outlet></ion-router-outlet>
+
+<div class="custom-tabbar">
+  <button class="tab-btn" [class.active]="isActive('home')" (click)="go('home')">
+    <ion-icon name="checkmark-circle-outline"></ion-icon>
+    <span>Tareas</span>
+  </button>
+  <button class="tab-btn" [class.active]="isActive('completed')" (click)="go('completed')">
+    <ion-icon name="list-circle-outline"></ion-icon>
+    <span>Listas</span>
+  </button>
+  <button class="tab-btn" [class.active]="isActive('stats')" (click)="go('stats')">
+    <ion-icon name="bar-chart-outline"></ion-icon>
+    <span>Stats</span>
+  </button>
+  <button class="tab-btn" [class.active]="isActive('settings')" (click)="go('settings')">
+    <ion-icon name="settings-outline"></ion-icon>
+    <span>Ajustes</span>
+  </button>
+</div>
